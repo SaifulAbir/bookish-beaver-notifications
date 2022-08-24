@@ -14,7 +14,7 @@ class NotificationAPIView(APIView):
             data = request.data
             channel_layer = get_channel_layer()
 
-            group_name = "notifications"
+            group_name = "notifications_" + json.loads(data["notification"])["user_details"]["user_id"]
             async_to_sync(channel_layer.group_send)(
                 group_name,
                 {

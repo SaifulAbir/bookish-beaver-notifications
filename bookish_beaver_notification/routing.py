@@ -11,7 +11,7 @@ application = ProtocolTypeRouter({
         AuthMiddlewareStack(  # Session Authentication, required to use if we want to access the user details in the consumer
             URLRouter(
                 [
-                    path("ws/notifications/", NotificationConsumer.as_asgi()),    # Url path for connecting to the websocket to send notifications.
+                    path("ws/notifications/<str:user_id>/", NotificationConsumer.as_asgi()),    # Url path for connecting to the websocket to send notifications.
                 ]
             )
         ),

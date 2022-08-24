@@ -8,7 +8,8 @@ class NotificationConsumer(WebsocketConsumer):
     # Function to connect to the websocket
     def connect(self):
         # print(self.scope["user"])   # Can access logged in user details by using self.scope.user, Can only be used if AuthMiddlewareStack is used in the routing.py
-        self.group_name = 'notifications'
+        print(self.scope['url_route']['kwargs']['user_id'])
+        self.group_name = 'notifications_' + self.scope['url_route']['kwargs']['user_id']
         async_to_sync(self.channel_layer.group_add)(self.group_name, self.channel_name)
         self.accept()
 
